@@ -1,0 +1,76 @@
+---
+title: Select
+---
+
+Displays a list of options for the user to pick from—triggered by a button.
+
+<Example>
+  <Box width="300px">
+    <Select items={['One', 'Two', 'Three', 'Four', 'Five']} placeholder="Please select an option" />
+  </Box>
+</Example>
+
+## Fullscreen mode
+
+<Example>
+  <Box width="300px">
+    <Select
+      label="Select"
+      items={['One', 'Two', 'Three', 'Four', 'Five']}
+      placeholder="Please select an option"
+      isFullscreen
+    />
+  </Box>
+</Example>
+
+## With label
+
+<Example>
+  <Box width="300px">
+    <Select
+      label="Select"
+      items={['One', 'Two', 'Three', 'Four', 'Five']}
+      placeholder="Please select an option"
+    />
+  </Box>
+</Example>
+
+## With search
+
+<Example>
+  <Box width="300px">
+    <SelectSearchExample />
+  </Box>
+</Example>
+
+## Loading
+
+<Example>
+  <Box width="300px">
+    <SelectSearchExample isLoading={true} />
+  </Box>
+</Example>
+
+## Custom display
+
+<Example>
+  <Box width="300px">
+    <SelectValueExample />
+  </Box>
+</Example>
+
+## Scrollable with search 
+
+<Example>
+  <Box width="300px">
+    <SelectSearchExample values={Array.from(Array(42).keys().map(e => `${e}`))} />
+  </Box>
+</Example>
+
+## Scrollable
+
+<Example>
+  <Box width="300px">
+    <Select items={Array.from(Array(42).keys())} placeholder="Please select an option" />
+  </Box>
+</Example>

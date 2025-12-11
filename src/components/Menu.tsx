@@ -1,0 +1,109 @@
+import { ReactNode } from 'react';
+import {
+  Header,
+  Menu as AriaMenu,
+  MenuItem as AriaMenuItem,
+  MenuSection as AriaMenuSection,
+  MenuSectionProps as AriaMenuSectionProps,
+  MenuItemProps as AriaMenuItemProps,
+  MenuProps as AriaMenuProps,
+  SubmenuTrigger as AriaSubmenuTrigger,
+  SubmenuTriggerProps as AriaSubmenuTriggerProps,
+  Separator,
+  SeparatorProps,
+} from 'react-aria-components';
+import classNames from 'classnames';
+import { Check, ChevronRight } from '@/components/icons';
+import { IconLabel } from '@/components/IconLabel';
+import { Icon } from './Icon';
+import styles from './Menu.module.css';
+
+export interface MenuProps extends AriaMenuProps<any> {
+  className?: string;
+  children?: ReactNode;
+}
+
+export function Menu({ className, children, ...props }: MenuProps) {
+  return (
+    <AriaMenu {...props} className={classNames(styles.menu, className)}>
+      {children}
+    </AriaMenu>
+  );
+}
+
+export interface MenuItemProps extends AriaMenuItemProps {
+  icon?: ReactNode;
+  label?: string;
+  showChecked?: boolean;
+  showSubMenuIcon?: boolean;
+}
+
+export function MenuItem({
+  icon,
+  label,
+  showChecked = true,
+  showSubMenuIcon,
+  children,
+  className,
+  ...props
+}: MenuItemProps) {
+  return (
+    <AriaMenuItem {...props} className={classNames(styles.item, className)}>
+      <IconLabel icon={icon} label={label}>
+        {children as any}
+      </IconLabel>
+      {showChecked && (
+        <Icon aria-hidden="true" className={styles.checkmark}>
+          <Check />
+        </Icon>
+      )}
+      {showSubMenuIcon && (
+        <Icon aria-hidden="true">
+          <ChevronRight />
+        </Icon>
+      )}
+    </AriaMenuItem>
+  );
+}
+
+export function MenuSeparator({ className, ...props }: SeparatorProps) {
+  return <Separator {...props} className={classNames(styles.separator, className)} />;
+}
+
+export interface MenuSectionProps extends AriaMenuSectionProps<any> {
+  title?: string;
+  maxHeight?: number;
+}
+
+export function MenuSection({
+  title,
+  maxHeight,
+  className,
+  style,
+  children,
+  ...props
+}: MenuSectionProps) {
+  const sectionStyle = {
+    maxHeight,
+    overflow: maxHeight ? 'auto' : undefined,
+  };
+
+  return (
+    <>
+      {title && <Header className={styles.header}>{title}</Header>}
+      <AriaMenuSection
+        {...props}
+        className={classNames(styles.section, className)}
+        style={{ ...sectionStyle, ...style }}
+      >
+        {children as any}
+      </AriaMenuSection>
+    </>
+  );
+}
+
+export interface SubmenuTriggerProps extends AriaSubmenuTriggerProps {}
+
+export function SubMenuTrigger({ children, ...props }: SubmenuTriggerProps) {
+  return <AriaSubmenuTrigger {...props}>{children}</AriaSubmenuTrigger>;
+}
